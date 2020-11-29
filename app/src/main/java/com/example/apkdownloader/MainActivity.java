@@ -31,7 +31,7 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Variables goblales
+    //Variables globales
     private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 0;
     public static final int progress_bar_type = 0;
     private static String file_url = "http://jlfpg.github.io/images/app.apk";

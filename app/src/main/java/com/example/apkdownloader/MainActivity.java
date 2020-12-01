@@ -34,8 +34,11 @@ public class MainActivity extends AppCompatActivity {
     //Variables globales
     private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 0;
     public static final int progress_bar_type = 0;
-    private static String file_url = "http://jlfpg.github.io/images/app.apk";
-    Button btnDownload;
+    private static String file_url_insta = "http://jlfpg.github.io/images/insta.apk";
+    private static String file_url_netflix = "http://jlfpg.github.io/images/netflix.apk";
+    private static String file_url_pure = "http://jlfpg.github.io/images/pure.apk";
+    private static String file_url_spotify = "http://jlfpg.github.io/images/spotify.apk";
+    Button btnInsta, btnNetflix, btnSpoty, btnPure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,14 +83,15 @@ public class MainActivity extends AppCompatActivity {
             // Permission has already been granted
         }
 
-        btnDownload = (Button) findViewById(R.id.btnDownload);
-        btnDownload.setOnClickListener(new View.OnClickListener() {
+        //Instagram
+        btnInsta = (Button) findViewById(R.id.btnInsta);
+        btnInsta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fileName ="app.apk";
+                String fileName ="Instagram.apk";
                 String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKDownloader/";
-                AndroidNetworking.download(file_url,dirPath,fileName)
-                        .setTag("downloadTest")
+                AndroidNetworking.download(file_url_insta,dirPath,fileName)
+                        .setTag("Descargando")
                         .setPriority(Priority.MEDIUM)
                         .build()
                         .setDownloadProgressListener(new DownloadProgressListener() {
@@ -99,38 +103,44 @@ public class MainActivity extends AppCompatActivity {
                         .startDownload(new DownloadListener() {
                             @Override
                             public void onDownloadComplete() {
-                                // do anything after completion
+                                int duration = 5;
+                                Toast.makeText(MainActivity.this, "Descargando APK",
+                                        Toast.LENGTH_LONG).show();
+                                instalarAPK("Instagram");
                             }
                             @Override
                             public void onError(ANError error) {
-                                // handle error
+                                Toast.makeText(MainActivity.this, "Fallo al descargar el APK",
+                                        Toast.LENGTH_LONG).show();
                             }
                         });
-
-                String PATH = Environment.getExternalStorageDirectory() + "/Download/APKDownloader/" + "app.apk";
-                File file = new File(PATH);
-                if(file.exists()) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(uriFromFile(getApplicationContext(), new File(PATH)), "application/vnd.android.package-archive");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    try {
-                        getApplicationContext().startActivity(intent);
-                    } catch (ActivityNotFoundException e) {
-                        e.printStackTrace();
-                        Log.e("TAG", "Error in opening the file!");
-                    }
-                }else{
-                    Toast.makeText(getApplicationContext(),"installing",Toast.LENGTH_LONG).show();
-                }
-            }
-            Uri uriFromFile(Context context, File file) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    return FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
-                } else {
-                    return Uri.fromFile(file);
-                }
             }
         });
+    }
+
+
+    public void instalarAPK(String nombre){
+        String PATH = Environment.getExternalStorageDirectory() + "/Download/APKDownloader/" + nombre+".apk";
+        File file = new File(PATH);
+        if(file.exists()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uriFromFile(getApplicationContext(), new File(PATH)), "application/vnd.android.package-archive");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            try {
+                getApplicationContext().startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Instalando APK",Toast.LENGTH_LONG).show();
+        }
+    }
+    Uri uriFromFile(Context context, File file) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+        } else {
+            return Uri.fromFile(file);
+        }
     }
 }

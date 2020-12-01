@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String fileName ="Instagram.apk";
-                String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKDownloader/";
+                String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
                 AndroidNetworking.download(file_url_insta,dirPath,fileName)
                         .setTag("Descargando")
                         .setPriority(Priority.MEDIUM)
@@ -97,15 +97,14 @@ public class MainActivity extends AppCompatActivity {
                         .setDownloadProgressListener(new DownloadProgressListener() {
                             @Override
                             public void onProgress(long bytesDownloaded, long totalBytes) {
-                                // do anything with progress
+                                Toast.makeText(MainActivity.this, "Descargando APK",
+                                        Toast.LENGTH_LONG).show();
                             }
                         })
                         .startDownload(new DownloadListener() {
                             @Override
                             public void onDownloadComplete() {
                                 int duration = 5;
-                                Toast.makeText(MainActivity.this, "Descargando APK",
-                                        Toast.LENGTH_LONG).show();
                                 instalarAPK("Instagram");
                             }
                             @Override
@@ -116,6 +115,109 @@ public class MainActivity extends AppCompatActivity {
                         });
             }
         });
+
+        //Netflix
+        btnNetflix = (Button) findViewById(R.id.btnNetflix);
+        btnNetflix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fileName ="Netflix.apk";
+                String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
+                AndroidNetworking.download(file_url_insta,dirPath,fileName)
+                        .setTag("Descargando")
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .setDownloadProgressListener(new DownloadProgressListener() {
+                            @Override
+                            public void onProgress(long bytesDownloaded, long totalBytes) {
+                                Toast.makeText(MainActivity.this, "Descargando APK",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .startDownload(new DownloadListener() {
+                            @Override
+                            public void onDownloadComplete() {
+                                int duration = 5;
+                                instalarAPK("Netflix");
+                            }
+                            @Override
+                            public void onError(ANError error) {
+                                Toast.makeText(MainActivity.this, "Fallo al descargar el APK",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        });
+
+        //Spotify
+        btnSpoty = (Button) findViewById(R.id.btnSpoty);
+        btnSpoty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fileName ="Spotify.apk";
+                String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
+                AndroidNetworking.download(file_url_insta,dirPath,fileName)
+                        .setTag("Descargando")
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .setDownloadProgressListener(new DownloadProgressListener() {
+                            @Override
+                            public void onProgress(long bytesDownloaded, long totalBytes) {
+                                Toast.makeText(MainActivity.this, "Descargando APK",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .startDownload(new DownloadListener() {
+                            @Override
+                            public void onDownloadComplete() {
+                                int duration = 5;
+                                instalarAPK("Spotify");
+                            }
+                            @Override
+                            public void onError(ANError error) {
+                                Toast.makeText(MainActivity.this, "Fallo al descargar el APK",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        });
+
+
+        //APKPure
+        btnPure = (Button) findViewById(R.id.btnPure);
+        btnPure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fileName ="APKPure.apk";
+                String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
+                AndroidNetworking.download(file_url_insta,dirPath,fileName)
+                        .setTag("Descargando")
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .setDownloadProgressListener(new DownloadProgressListener() {
+                            @Override
+                            public void onProgress(long bytesDownloaded, long totalBytes) {
+                                Toast.makeText(MainActivity.this, "Descargando APK",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .startDownload(new DownloadListener() {
+                            @Override
+                            public void onDownloadComplete() {
+                                int duration = 5;
+                                instalarAPK("APKPure");
+                            }
+                            @Override
+                            public void onError(ANError error) {
+                                Toast.makeText(MainActivity.this, "Fallo al descargar el APK",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        });
+
+
+
     }
 
 

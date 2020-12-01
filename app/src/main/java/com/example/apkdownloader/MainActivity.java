@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String fileName ="Netflix.apk";
                 String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
-                AndroidNetworking.download(file_url_insta,dirPath,fileName)
+                AndroidNetworking.download(file_url_netflix,dirPath,fileName)
                         .setTag("Descargando")
                         .setPriority(Priority.MEDIUM)
                         .build()
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String fileName ="Spotify.apk";
                 String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
-                AndroidNetworking.download(file_url_insta,dirPath,fileName)
+                AndroidNetworking.download(file_url_spotify,dirPath,fileName)
                         .setTag("Descargando")
                         .setPriority(Priority.MEDIUM)
                         .build()
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String fileName ="APKPure.apk";
                 String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
-                AndroidNetworking.download(file_url_insta,dirPath,fileName)
+                AndroidNetworking.download(file_url_pure,dirPath,fileName)
                         .setTag("Descargando")
                         .setPriority(Priority.MEDIUM)
                         .build()

@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         btnInsta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Descargando APP",
+                        Toast.LENGTH_LONG).show();
                 String fileName ="Instagram.apk";
                 String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
                 AndroidNetworking.download(file_url_insta,dirPath,fileName)
@@ -97,15 +99,17 @@ public class MainActivity extends AppCompatActivity {
                         .setDownloadProgressListener(new DownloadProgressListener() {
                             @Override
                             public void onProgress(long bytesDownloaded, long totalBytes) {
-                                Toast.makeText(MainActivity.this, "Descargando APK",
-                                        Toast.LENGTH_LONG).show();
+
                             }
                         })
                         .startDownload(new DownloadListener() {
                             @Override
                             public void onDownloadComplete() {
                                 int duration = 5;
-                                instalarAPK("Instagram");
+                                Intent i = new Intent(MainActivity.this, ScanActivity.class);
+                                i.putExtra("app", "Instagram");
+                                startActivity(i);
+                                finish();
                             }
                             @Override
                             public void onError(ANError error) {
@@ -121,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         btnNetflix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Descargando APP",
+                        Toast.LENGTH_LONG).show();
                 String fileName ="Netflix.apk";
                 String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
                 AndroidNetworking.download(file_url_netflix,dirPath,fileName)
@@ -130,15 +136,17 @@ public class MainActivity extends AppCompatActivity {
                         .setDownloadProgressListener(new DownloadProgressListener() {
                             @Override
                             public void onProgress(long bytesDownloaded, long totalBytes) {
-                                Toast.makeText(MainActivity.this, "Descargando APK",
-                                        Toast.LENGTH_LONG).show();
+
                             }
                         })
                         .startDownload(new DownloadListener() {
                             @Override
                             public void onDownloadComplete() {
                                 int duration = 5;
-                                instalarAPK("Netflix");
+                                Intent i = new Intent(MainActivity.this, ScanActivity.class);
+                                i.putExtra("app", "Netflix");
+                                startActivity(i);
+                                finish();
                             }
                             @Override
                             public void onError(ANError error) {
@@ -154,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
         btnSpoty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Descargando APP",
+                        Toast.LENGTH_LONG).show();
                 String fileName ="Spotify.apk";
                 String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
                 AndroidNetworking.download(file_url_spotify,dirPath,fileName)
@@ -163,15 +173,17 @@ public class MainActivity extends AppCompatActivity {
                         .setDownloadProgressListener(new DownloadProgressListener() {
                             @Override
                             public void onProgress(long bytesDownloaded, long totalBytes) {
-                                Toast.makeText(MainActivity.this, "Descargando APK",
-                                        Toast.LENGTH_LONG).show();
+
                             }
                         })
                         .startDownload(new DownloadListener() {
                             @Override
                             public void onDownloadComplete() {
                                 int duration = 5;
-                                instalarAPK("Spotify");
+                                Intent i = new Intent(MainActivity.this, ScanActivity.class);
+                                i.putExtra("app", "Spotify");
+                                startActivity(i);
+                                finish();
                             }
                             @Override
                             public void onError(ANError error) {
@@ -188,6 +200,8 @@ public class MainActivity extends AppCompatActivity {
         btnPure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Descargando APP",
+                        Toast.LENGTH_LONG).show();
                 String fileName ="APKPure.apk";
                 String dirPath=Environment.getExternalStorageDirectory().toString() + "/Download/APKVault/";
                 AndroidNetworking.download(file_url_pure,dirPath,fileName)
@@ -197,15 +211,17 @@ public class MainActivity extends AppCompatActivity {
                         .setDownloadProgressListener(new DownloadProgressListener() {
                             @Override
                             public void onProgress(long bytesDownloaded, long totalBytes) {
-                                Toast.makeText(MainActivity.this, "Descargando APK",
-                                        Toast.LENGTH_LONG).show();
+
                             }
                         })
                         .startDownload(new DownloadListener() {
                             @Override
                             public void onDownloadComplete() {
                                 int duration = 5;
-                                instalarAPK("APKPure");
+                                Intent i = new Intent(MainActivity.this, ScanActivity.class);
+                                i.putExtra("app", "APKPure");
+                                startActivity(i);
+                                finish();
                             }
                             @Override
                             public void onError(ANError error) {
@@ -220,29 +236,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    public void instalarAPK(String nombre){
-        String PATH = Environment.getExternalStorageDirectory() + "/Download/APKDownloader/" + nombre+".apk";
-        File file = new File(PATH);
-        if(file.exists()) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(uriFromFile(getApplicationContext(), new File(PATH)), "application/vnd.android.package-archive");
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            try {
-                getApplicationContext().startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                e.printStackTrace();
-            }
-        }else{
-            Toast.makeText(getApplicationContext(),"Instalando APK",Toast.LENGTH_LONG).show();
-        }
-    }
-    Uri uriFromFile(Context context, File file) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
-        } else {
-            return Uri.fromFile(file);
-        }
-    }
 }

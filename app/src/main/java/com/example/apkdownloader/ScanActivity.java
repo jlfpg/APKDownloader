@@ -14,20 +14,9 @@ import android.os.Environment;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.DownloadListener;
-import com.androidnetworking.interfaces.DownloadProgressListener;
-
 import java.io.File;
 
 public class ScanActivity extends AppCompatActivity {
@@ -48,17 +37,6 @@ public class ScanActivity extends AppCompatActivity {
         TextView txtInfo = (TextView) findViewById(R.id.txtInfo);
         txtInfo.setText("INSTALANDO "+app2);
         PATH = Environment.getExternalStorageDirectory() + "/Download/APKVault/" + app+".apk";
-        /*WebView myWebView = (WebView) findViewById(R.id.WebQuixxi);
-        myWebView.setWebViewClient(new WebViewClient());
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setAllowContentAccess(true);
-        webSettings.setAllowFileAccess(true);
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        webSettings.setAllowUniversalAccessFromFileURLs(true);
-        myWebView.setWebChromeClient(new WebChromeClient());
-
-        myWebView.loadUrl("https://vulnerabilitytest.quixxi.com/#/");*/
         String url = "https://www.sisik.eu/apk-tool";
         try {
             Intent i = new Intent("android.intent.action.MAIN");
@@ -72,7 +50,6 @@ public class ScanActivity extends AppCompatActivity {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(i);
         }
-
         Button btnInstall = (Button) findViewById(R.id.btnInstall);
         btnInstall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +57,6 @@ public class ScanActivity extends AppCompatActivity {
                 instalarAPK(app);
             }
         });
-
     }
 
     public void instalarAPK(String nombre){

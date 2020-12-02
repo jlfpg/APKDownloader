@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
-
 public class SplashActivity extends AppCompatActivity {
     private static int TIME_OUT = 700;
     @Override

@@ -26,7 +26,7 @@
         android:id="@+id/txtInfo"
         android:layout_width="394dp"
         android:layout_height="90dp"
-        android:text="APKS MAS POPULARES"
+        android:text="APPS MAS POPULARES"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="30sp"
